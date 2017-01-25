@@ -9,6 +9,10 @@ var pkg = require('./package');
 var winston = require('winston');
 var expressWinston = require('express-winston');
 
+//var Agenda = require('agenda');
+//var JobManager = require('./lib/jobManager');
+var JobManagerLite = require('./lib/jobManagerLite');
+
 var app = express();
 
 // 设置模板目录
@@ -54,10 +58,10 @@ app.use(function (req, res, next) {
 // 正常请求的日志
 app.use(expressWinston.logger({
   transports: [
-    new (winston.transports.Console)({
-      json: true,
-      colorize: true
-    }),
+    // new (winston.transports.Console)({
+    //   json: true,
+    //   colorize: true
+    // }),
     new winston.transports.File({
       filename: 'logs/success.log'
     })
@@ -84,6 +88,13 @@ app.use(function (err, req, res, next) {
     error: err
   });
 });
+
+
+//TODO: agenda
+//var agenda = new Agenda({db: { address: config.mongodb},processEvery:'1 minute'});
+//var jobManager = new JobManager(agenda);
+//jobManager.restartJobs();
+//agenda.start();
 
 if (module.parent) {
   module.exports = app;

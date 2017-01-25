@@ -1,0 +1,39 @@
+<%- include('header') %>
+
+<div class="ui grid">
+  <div class="four wide column">
+    <a class="avatar"
+       href="/posts?author=<%= user._id %>"
+       data-title="<%= user.name %> | <%= ({m: '男', f: '女', x: '保密'})[user.gender] %>"
+       data-content="<%= user.bio %>">
+      <img class="avatar" src="/img/<%= user.avatar %>">
+    </a>
+  </div>
+
+  <div class="eight wide column">
+    <form class="ui form segment" method="post" action="/jobs/<%= job._id %>/edit">
+      <div class="field required">
+        <label>标题</label>
+        <input type="text" name="title" value="<%= job.title %>">
+      </div>
+
+      <div class="field required">
+        <label>URL</label>
+        <input type="text" name="url"  value="<%= job.url %>">
+      </div>
+      <div class="field required">
+        <label>Actions</label>
+        <input type="text" name="actions"  value="<%= job.actions %>">
+      </div>
+      <div class="field required">
+        <label>启用</label>
+        <input type="checkbox" name="active"  checked="<%= job.active %>">
+      </div>
+
+      <input type="submit" class="ui button" value="更新">
+    </form>
+  </div>
+
+</div>
+
+<%- include('footer') %>

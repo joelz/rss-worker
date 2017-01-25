@@ -6,6 +6,8 @@ module.exports = function (app) {
   app.use('/signin', require('./signin'));
   app.use('/signout', require('./signout'));
   app.use('/posts', require('./posts'));
+  app.use('/jobs', require('./jobs'));
+  app.use('/jobexec', require('./jobexec'));
 
   // 404 page
   app.use(function (req, res) {
