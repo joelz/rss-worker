@@ -39,7 +39,8 @@ function fetchFeed(param,callback) {
 function removeDuplicate(data,callback) {
 	var size = data.items.length;
 	var filtered = [];
-	data.items.forEach(function(item){
+	data.items.forEach(function (item) {
+		//TODO： 加上用户uid去判断唯一
 		Post.findOne({guid: item.guid}).exec().then(function (post) {
 			size--;
 			if(!post) filtered.push(item);
