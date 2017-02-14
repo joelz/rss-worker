@@ -40,8 +40,8 @@ function removeDuplicate(data,callback) {
 	var size = data.items.length;
 	var filtered = [];
 	data.items.forEach(function (item) {
-		//TODO： 加上用户uid去判断唯一
-		Post.findOne({guid: item.guid}).exec().then(function (post) {
+		
+		Post.findOne({guid: item.guid,author:data.userId}).exec().then(function (post) {
 			size--;
 			if(!post) filtered.push(item);
 			if(size===0) return _callback();
@@ -72,6 +72,7 @@ function updateFeed(data, callback) {
 			item.meta = { title: data.meta.title };
 		item.job = data.jobId;
 		item.new = true;
+		item.author = data.userId;
 		
 		Post.create(item).exec().then(function () {
 			if (--size === 0) callback(data);
