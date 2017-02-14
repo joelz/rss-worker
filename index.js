@@ -9,11 +9,19 @@ var pkg = require('./package');
 var winston = require('winston');
 var expressWinston = require('express-winston');
 
-//var Agenda = require('agenda');
-//var JobManager = require('./lib/jobManager');
-var JobManagerLite = require('./lib/jobManagerLite');
+var Agenda = require('agenda');
+var JobManager = require('./lib/jobManager');
 
 var app = express();
+
+var agenda = new Agenda({db: { address: config.mongodb}});
+var jobManager = new JobManager(agenda);
+
+app.use(function(req, res, next){
+    req.agenda = agenda;
+    req.jobManager = jobManager;
+    next();
+});
 
 // 设置模板目录
 app.set('views', path.join(__dirname, 'views'));
@@ -90,11 +98,10 @@ app.use(function (err, req, res, next) {
 });
 
 
-//TODO: agenda
-//var agenda = new Agenda({db: { address: config.mongodb},processEvery:'1 minute'});
-//var jobManager = new JobManager(agenda);
-//jobManager.restartJobs();
-//agenda.start();
+agenda.on('ready', function () {
+    jobManager.restartJobs();
+    agenda.start();
+});
 
 if (module.parent) {
   module.exports = app;

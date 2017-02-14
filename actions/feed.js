@@ -30,6 +30,7 @@ function fetchFeed(param,callback) {
 			param.meta = meta;
 			param.items = items;
 
+			console.log("======== " + param.url + " ========");
 			console.log("DONE: feed.fetchFeed, get " + items.length + " items");
 
 			callback(param);

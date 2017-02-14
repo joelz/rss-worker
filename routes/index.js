@@ -7,7 +7,7 @@ module.exports = function (app) {
   app.use('/signout', require('./signout'));
   app.use('/posts', require('./posts'));
   app.use('/jobs', require('./jobs'));
-  app.use('/jobexec', require('./jobexec'));
+  app.use('/agenda', require('./agenda'));
 
   // 404 page
   app.use(function (req, res) {
