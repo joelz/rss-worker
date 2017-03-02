@@ -1,13 +1,5 @@
 <div class="post-content">
   <div class="ui grid">
-    <div class="four wide column">
-      <a class="avatar"
-         href="/jobs?user=<%= job.user._id %>"
-         data-title="<%= job.user.name %> | <%= ({m: '男', f: '女', x: '保密'})[job.user.gender] %>"
-         data-content="<%= job.user.bio %>">
-        <img class="avatar" src="/img/<%= job.user.avatar %>">
-      </a>
-    </div>
 
     <div class="eight wide column">
       <div class="ui segment">
@@ -15,10 +7,7 @@
         <pre><%- job.url %></pre>
         <div>
           <span class="tag">最后执行时间：<%= job.lastFetchEndTime %></span>
-          <span class="tag right">
-            <span>浏览(<%= job.pv %>)</span>
-            <span>留言(<%= job.commentsCount %>)</span>
-            
+          <span class="tag right">            
             <% if (user && job.user._id && user._id.toString() === job.user._id.toString()) { %>
               <div class="ui inline dropdown">
                 <div class="text"></div>

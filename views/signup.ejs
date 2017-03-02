@@ -1,40 +1,75 @@
 <%- include('header') %>
 
-<div class="ui grid">
-  <div class="four wide column"></div>
-  <div class="eight wide column">
-    <form class="ui form segment" method="post" enctype="multipart/form-data">
-      <div class="field required">
-        <label>用户名</label>
-        <input placeholder="用户名" type="text" name="name">
+
+<div class="col-lg-2">
+</div>
+
+<div class="col-lg-8">
+  <div class="well">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>注册</legend>
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-4 control-label">用户名</label>
+          <div class="col-lg-8">
+            <input type="text" class="form-control" id="inputUserName" name="name" placeholder="用户名">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-4 control-label">密码(至少六个字符)</label>
+          <div class="col-lg-8">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="密码">
+          </div>
+        </div>
+
+
+      <div class="form-group">
+        <label class="col-lg-4 control-label">重复密码</label>
+        <div class="col-lg-8">
+        <input placeholder="重复密码" type="password" class="form-control" name="repassword">
+         </div>
       </div>
-      <div class="field required">
-        <label>密码</label>
-        <input placeholder="密码" type="password" name="password">
-      </div>
-      <div class="field required">
-        <label>重复密码</label>
-        <input placeholder="重复密码" type="password" name="repassword">
-      </div>
-      <div class="field required">
-        <label>性别</label>
-        <select class="ui compact selection dropdown" name="gender">
+      <div class="form-group">
+        <label class="col-lg-4 control-label">性别</label>
+        <div class="col-lg-8">
+        <select class="form-control" name="gender">
           <option value="m">男</option>
           <option value="f">女</option>
           <option value="x">保密</option>
         </select>
+         </div>
       </div>
-      <div class="field required">
-        <label>头像</label>
-        <input type="file" name="avatar">
+      <div class="form-group">
+        <label class="col-lg-4 control-label">头像</label>
+        <div class="col-lg-8">
+        <input type="file" class="form-control" name="avatar">
+         </div>
       </div>
-      <div class="field required">
-        <label>个人简介</label>
-        <textarea name="bio" rows="5" v-model="user.bio"></textarea>
+      <div class="form-group">
+        <label class="col-lg-4 control-label">个人简介</label>
+        <div class="col-lg-8">
+        <textarea name="bio" class="form-control" rows="5" v-model="user.bio"></textarea>
+         </div>
       </div>
-      <input type="submit" class="ui button fluid" value="注册">
-    </div>
-  </form>
+
+
+
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-4">
+            <button type="submit" class="btn btn-primary">注册</button>
+            <a href="/signin">已有账户？去登录</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
+
+<div class="col-lg-2">
+</div>
+
+
+
 
 <%- include('footer') %>

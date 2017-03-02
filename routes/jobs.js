@@ -7,7 +7,7 @@ var checkLogin = require('../middlewares/check').checkLogin;
 
 // GET /jobs 
 //   eg: GET /jobs?user=xxx
-router.get('/', function(req, res, next) {
+router.get('/', checkLogin, function(req, res, next) {
   var user = req.query.user;
 
   JobModel.getJobs(user)
@@ -68,7 +68,7 @@ router.post('/', checkLogin, function(req, res, next) {
 });
 
 // GET /jobs/:jobId 单独一个Job的显示页
-router.get('/:jobId', function(req, res, next) {
+router.get('/:jobId', checkLogin, function(req, res, next) {
   var jobId = req.params.jobId;
   
   Promise.all([

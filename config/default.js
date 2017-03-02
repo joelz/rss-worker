@@ -7,5 +7,5 @@ module.exports = {
   },
   mongodb: 'mongodb://localhost:27017/myblog',
   maxParallelLimit: 3,
-  jobIntervalInMin: 1
+  jobIntervalInMin: 10
 };

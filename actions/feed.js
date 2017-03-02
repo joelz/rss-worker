@@ -31,6 +31,7 @@ function fetchFeed(param,callback) {
 			param.items = items;
 
 			console.log("======== " + param.url + " ========");
+			console.log(new Date().toString());
 			console.log("DONE: feed.fetchFeed, get " + items.length + " items");
 
 			callback(param);
