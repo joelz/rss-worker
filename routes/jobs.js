@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 var JobModel = require('../models/jobs');
-var CommentModel = require('../models/comments');
+
 var checkLogin = require('../middlewares/check').checkLogin;
 
 // GET /jobs 
-//   eg: GET /jobs?user=xxx
+//   eg: GET /jobs
 router.get('/', checkLogin, function(req, res, next) {
-  var user = req.query.user;
+
+  var user = req.session.user._id;
 
   JobModel.getJobs(user)
     .then(function (jobs) {
@@ -72,13 +73,13 @@ router.get('/:jobId', checkLogin, function(req, res, next) {
   var jobId = req.params.jobId;
   
   Promise.all([
-    JobModel.getJobById(jobId)// 获取文章信息
+    JobModel.getJobById(jobId)
   ])
   .then(function (result) {
     var job = result[0];
 
     if (!job) {
-      throw new Error('该文章不存在');
+      throw new Error('该Job不存在');
     }
 
     res.render('job', {
@@ -129,6 +130,11 @@ router.post('/:jobId/edit', checkLogin, function(req, res, next) {
     if (!actions.length) {
       throw new Error('请填写actions');
     }
+
+    if (user.toString() !== jobId.toString()) {
+        throw new Error('权限不足');
+    }
+
   } catch (e) {
     req.flash('error', e.message);
     return res.redirect('back');

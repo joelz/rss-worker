@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var PostModel = require('../models/posts');
-var CommentModel = require('../models/comments');
+
 var checkLogin = require('../middlewares/check').checkLogin;
 
 // GET /posts 所有用户或者特定用户的文章页
@@ -10,8 +10,6 @@ var checkLogin = require('../middlewares/check').checkLogin;
 router.get('/', checkLogin, function (req, res, next) {
   
   var author = req.session.user._id;
-
-  var author = req.query.author;
 
   PostModel.getPosts(author)
     .then(function (posts) {
@@ -27,9 +25,7 @@ router.get('/:postId', checkLogin, function(req, res, next) {
   var postId = req.params.postId;
   
   Promise.all([
-    PostModel.getPostById(postId),// 获取文章信息
-    CommentModel.getComments(postId),// 获取该文章所有留言
-    PostModel.incPv(postId)// pv 加 1
+    PostModel.getPostById(postId)// 获取文章信息
   ])
   .then(function (result) {
     var post = result[0];
