@@ -1,49 +1,65 @@
 var express = require('express');
 var router = express.Router();
-
+var config = require('config-lite');
 var PostModel = require('../models/posts');
-
 var checkLogin = require('../middlewares/check').checkLogin;
 
-// GET /posts 所有用户或者特定用户的文章页
-//   eg: GET /posts?author=xxx
+// GET /posts 当前用户的post页
+//   eg: GET /posts
 router.get('/', checkLogin, function (req, res, next) {
   
   var author = req.session.user._id;
+  var lastId = null;
+  var prevOrNext = null;
 
-  PostModel.getPosts(author)
+  if (req.query.next) { 
+    lastId = req.query.next;
+    prevOrNext = "next";
+  }
+
+  
+  PostModel.getPosts(author,null,lastId,prevOrNext)
     .then(function (posts) {
+      var lastId = -1;
+
+      if (posts.length > 0) {
+        lastId = posts[posts.length - 1]._id.toString();
+      }
+
       res.render('posts', {
-        posts: posts
+        posts: posts,
+        lastId: lastId
       });
     })
     .catch(next);
 });
 
-// GET /posts/:postId 单独一篇的文章页
+// GET /posts/:postId 
 router.get('/:postId', checkLogin, function(req, res, next) {
   var postId = req.params.postId;
   
   Promise.all([
-    PostModel.getPostById(postId)// 获取文章信息
+    PostModel.getPostById(postId)
   ])
   .then(function (result) {
     var post = result[0];
-    var comments = result[1];
+    
     if (!post) {
-      throw new Error('该文章不存在');
+      throw new Error('该Post不存在');
     }
 
     res.render('post', {
-      post: post,
-      comments: comments
+      post: post
     });
   })
   .catch(next);
 });
 
 
-// POST /posts 发表一篇文章
+/*
+
+// POST /posts 
+//示例代码，没用到
 router.post('/', checkLogin, function(req, res, next) {
   var author = req.session.user._id;
   var title = req.fields.title;
@@ -79,5 +95,7 @@ router.post('/', checkLogin, function(req, res, next) {
     })
     .catch(next);
 });
+
+*/
 
 module.exports = router;

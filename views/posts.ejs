@@ -1,7 +1,25 @@
 <%- include('header') %>
 
+<h2>Post列表</h2>
+
+<% if (!posts || posts.length == 0) { %>
+    <p>目前还没有抓取到任何内容。</p>
+<% } %>
+
+<ul class="list-group">
 <% posts.forEach(function (post) { %>
-  <%- include('components/post-content', { post: post }) %>
+<li class="list-group-item">
+    <h3 ><a href="/posts/<%= post._id %>" class="list-group-item"> <%= post.title %></a></h3>
+    <p >Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <a href="/jobs/<%= post.job._id %>" class="list-group-item"> <%= post.job.title %></a>
+</li>
 <% }) %>
+</ul>
+
+<ul class="pager">
+  <li><a href="#">Previous</a></li>
+  <li><a href="/posts?next=<%= lastId %>">Next</a></li>
+</ul>
 
 <%- include('footer') %>
+
