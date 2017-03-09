@@ -22,50 +22,12 @@ router.get('/', checkLogin, function (req, res, next) {
     prevOrNext = "prev";
   }
   
-  PostModel.getPosts(author,null,startId,prevOrNext)
-    .then(function (posts) {
-      
-      var pagerParam = { firstId: -1, lastId: -1 };
-
-      if (posts.length == 0) { 
+  PostModel.getPostsPage(author,null,startId,prevOrNext)
+    .then(function (obj) {
         res.render('posts', {
-          posts: posts,
-          pagerParam: pagerParam
+          posts: obj.data,
+          pagerParam: obj.pagerParam
         });
-
-        return;
-      }
-      
-      if (prevOrNext == 'prev') {
-        posts.sort((a, b) => a._id < b._id);
-      }      
-      
-      pagerParam.lastId = posts[posts.length - 1]._id.toString();
-      pagerParam.firstId = posts[0]._id.toString();      
-
-      Promise.all([
-        PostModel.getPosts(author, null, pagerParam.firstId, 'prev'),
-        PostModel.getPosts(author,null,pagerParam.lastId,'next'),
-      ])
-        .then(function (result) {
-          var prevPage = result[0];
-          var nextPage = result[1];
-          
-          if (!result[0] || result[0].length == 0) { 
-            pagerParam.firstId = -1;
-          }
-
-          if (!result[1] || result[1].length == 0) { 
-            pagerParam.lastId = -1;
-          }          
-          
-          res.render('posts', {
-            posts: posts,
-            pagerParam: pagerParam
-          });
-        })
-        .catch(next);   
-      
     })
     .catch(next);
 });
