@@ -12,13 +12,18 @@
     <h3 ><a href="/posts/<%= post._id %>" class="list-group-item"> <%= post.title %></a></h3>
     <p >Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
     <a href="/jobs/<%= post.job._id %>" class="list-group-item"> <%= post.job.title %></a>
+    <p> <%= post.created_at %> </p>
 </li>
 <% }) %>
 </ul>
 
 <ul class="pager">
-  <li><a href="#">Previous</a></li>
-  <li><a href="/posts?next=<%= lastId %>">Next</a></li>
+<% if ( pagerParam.firstId != -1) { %>
+  <li><a href="/posts?prev=<%= pagerParam.firstId %>">Previous</a></li>
+<% } %>
+<% if ( pagerParam.lastId != -1) { %>
+  <li><a href="/posts?next=<%= pagerParam.lastId %>">Next</a></li>
+<% } %>
 </ul>
 
 <%- include('footer') %>

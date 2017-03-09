@@ -45,7 +45,7 @@ module.exports = {
   },
 
   // 按创建时间降序获取所有用户文章或者某个特定用户的所有文章
-  getPosts: function getPosts(author,job,lastId,prevOrNext) {
+  getPosts: function getPosts(author,job,startId,prevOrNext) {
     var query = {};
     if (author) {
       query.author = author;
@@ -56,9 +56,8 @@ module.exports = {
     }
 
     var sortObj = { _id: -1 };
-    
-    if (lastId) {
-      query._id = prevOrNext == "prev" ? { "$gt": ObjectId(lastId) } : { "$lt": ObjectId(lastId) };
+    if (startId) {
+      query._id = prevOrNext == "prev" ? { "$gt": ObjectId(startId) } : { "$lt": ObjectId(startId) };
 
       if (prevOrNext == "prev") {
         sortObj._id = 1;
