@@ -72,19 +72,22 @@ router.post('/', checkLogin, function(req, res, next) {
 // GET /jobs/:jobId 单独一个Job的显示页
 router.get('/:jobId', checkLogin, function(req, res, next) {
   var jobId = req.params.jobId;
-  
+  var user = req.session.user._id;
+
   Promise.all([
-    JobModel.getJobById(jobId)
+    JobModel.getJobById(jobId),
+    PostModel.getPostsPage(user,jobId,null,null)
   ])
   .then(function (result) {
     var job = result[0];
-
+    var posts = result[1];
     if (!job) {
       throw new Error('该Job不存在');
     }
 
     res.render('job', {
-      job: job
+      job: job,
+      posts: posts
     });
   })
   .catch(next);

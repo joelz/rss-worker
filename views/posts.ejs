@@ -1,21 +1,24 @@
 <%- include('header') %>
 
-<h2>Post列表</h2>
+<div class="row col-md-offset-1">
+  <h3 >Post列表</h3>
+</div>
 
 <% if (!posts || posts.length == 0) { %>
     <p>目前还没有抓取到任何内容。如果还没创建过Job，您可以先<a href="/jobs/create">创建Job</a>。</p>
 <% } %>
 
-<ul class="list-group">
 <% posts.forEach(function (post) { %>
-<li class="list-group-item">
-    <h3 ><a href="/posts/<%= post._id %>" class="list-group-item"> <%= post.title %></a></h3>
-    <p >Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <a href="/jobs/<%= post.job._id %>" class="list-group-item"> <%= post.job.title %></a>
-    <p> <%= post.pub_at %> </p>
-</li>
+<div class="row  col-md-offset-1" style="border:1px solid green; margin-top:1px;">
+    <div class="col-md-10">
+      <h4 ><a href="/posts/<%= post._id %>"> <%= post.title %></a></h4>
+    </div>
+    <div class="col-md-10">
+      <a href="/jobs/<%= post.job._id %>"> <%= post.job.title %></a>
+      <%= post.pub_at %>
+    </div>
+</div>
 <% }) %>
-</ul>
 
 <ul class="pager">
 <% if ( pagerParam.firstId != -1) { %>
