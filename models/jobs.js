@@ -29,6 +29,15 @@ module.exports = {
       .exec();
   },
 
+  getActiveJobs: function getActiveJobs() {
+    return Job
+      .find({ active: true })
+      .populate({ path: 'user', model: 'User' })
+      .sort({ _id: -1 })
+      .addCreatedAt()
+      .exec();
+  },
+
   updateJobById: function updateJobById(jobId, user, data) {
     return Job.update({ user: user, _id: jobId }, { $set: data }).exec();
   },

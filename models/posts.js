@@ -205,6 +205,17 @@ module.exports = {
   delPostById: function delPostById(postId, author) {
     return Post.remove({ author: author, _id: postId })
       .exec();
+  },
+  create: function create(post) {
+    return Post.create(post).exec();
+  },
+  queryOne: function query(query) {
+    return Post
+      .findOne(query)
+      .populate({ path: 'author', model: 'User' })
+      .populate({ path: 'job', model: 'Job' })
+      .addCreatedAt()//這个方法定义在mongo.js中
+      .exec();
   }
 
 };

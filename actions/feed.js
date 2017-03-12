@@ -1,7 +1,7 @@
 var request = require('request'),
 	FeedParser = require('feedparser');
 
-var Post = require('../lib/mongo').Post;
+var PostModel = require('../models/posts');
 
 function fetchFeed(param,callback) {
 	var meta = null,
@@ -43,7 +43,7 @@ function removeDuplicate(data,callback) {
 	var filtered = [];
 	data.items.forEach(function (item) {
 		
-		Post.findOne({guid: item.guid,author:data.userId}).exec().then(function (post) {
+		PostModel.queryOne({guid: item.guid,author:data.userId}).then(function (post) {
 			size--;
 			if(!post) filtered.push(item);
 			if(size===0) return _callback();
@@ -76,7 +76,7 @@ function updateFeed(data, callback) {
 		item.new = true;
 		item.author = data.userId;
 		
-		Post.create(item).exec().then(function () {
+		PostModel.create(item).then(function () {
 			if (--size === 0) callback(data);
 		});
 	});
