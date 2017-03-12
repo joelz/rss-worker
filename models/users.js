@@ -12,5 +12,18 @@ module.exports = {
       .findOne({ name: name })
       .addCreatedAt()
       .exec();
-  }
+  },
+
+  // 通过用户名获取用户信息
+  getUserById: function getUserById(id) {
+    return User
+      .findOne({ _id: id })
+      .addCreatedAt()
+      .exec();
+  },
+
+  updatePwdById: function updatePwdById(userId, pwd) {
+    return User.update({ _id: userId }, { $set:  { "password": pwd } }).exec();
+  },
+
 };

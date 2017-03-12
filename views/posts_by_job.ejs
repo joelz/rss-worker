@@ -1,9 +1,9 @@
 <%- include('header') %>
 
-<h2>Post列表</h2>
+<h2><%= job.title %> 的 Post列表</h2>
 
 <% if (!posts || posts.length == 0) { %>
-    <p>目前还没有抓取到任何内容。如果还没创建过Job，您可以先<a href="/jobs/create">创建Job</a>。</p>
+    <p>目前还没有抓取到任何内容。</p>
 <% } %>
 
 <ul class="list-group">
@@ -19,10 +19,10 @@
 
 <ul class="pager">
 <% if ( pagerParam.firstId != -1) { %>
-  <li><a href="/posts?prev=<%= pagerParam.firstId %>">Previous</a></li>
+  <li><a href="/jobs/<%= job._id %>/posts?prev=<%= pagerParam.firstId %>">Previous</a></li>
 <% } %>
 <% if ( pagerParam.lastId != -1) { %>
-  <li><a href="/posts?next=<%= pagerParam.lastId %>">Next</a></li>
+  <li><a href="/jobs/<%= job._id %>/posts?next=<%= pagerParam.lastId %>">Next</a></li>
 <% } %>
 </ul>
 

@@ -3,7 +3,7 @@ var router = express.Router();
 var config = require('config-lite');
 
 var JobModel = require('../models/jobs');
-
+var PostModel = require('../models/posts');
 var checkLogin = require('../middlewares/check').checkLogin;
 
 // GET /jobs 
@@ -88,6 +88,45 @@ router.get('/:jobId', checkLogin, function(req, res, next) {
     });
   })
   .catch(next);
+});
+
+// GET /jobs/:jobId/posts 单独一个Job的Posts页
+router.get('/:jobId/posts', checkLogin, function(req, res, next) {
+  var jobId = req.params.jobId;
+  var author = req.session.user._id;
+  var startId = null;
+  var prevOrNext = null;
+
+  if (req.query.next) { 
+    startId = req.query.next;
+    prevOrNext = "next";
+  }
+
+  else if (req.query.prev) { 
+    startId = req.query.prev;
+    prevOrNext = "prev";
+  }
+  
+  Promise.all([
+    JobModel.getJobById(jobId),
+    PostModel.getPostsPage(author,jobId,startId,prevOrNext)
+  ])
+  .then(function (result) {
+    var job = result[0];
+    var obj=result[1];
+
+    if (!job) {
+      throw new Error('该Job不存在');
+    }
+
+    res.render('posts_by_job', {
+      job: job,
+      posts: obj.data,
+      pagerParam: obj.pagerParam
+    });
+  })
+  .catch(next);
+
 });
 
 // GET /jobs/:jobId/edit 更新Job页

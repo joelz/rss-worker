@@ -117,7 +117,7 @@ module.exports = {
           var pagerParam = { firstId: -1, lastId: -1 };
 
           if (posts.length == 0) {
-            resolve({
+            return resolve({
               data: posts,
               pagerParam: pagerParam
             });

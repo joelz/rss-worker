@@ -1,6 +1,7 @@
 
 var Job = require('../lib/mongo').Job;
 
+
 module.exports = {
 
   create: function create(job) {
@@ -35,4 +36,5 @@ module.exports = {
   disableJobById: function delJobById(jobId, user, flag) {
       return Job.update({ user: user, _id: jobId }, { $set: { "active": flag } }).exec();
   }
+
 };
