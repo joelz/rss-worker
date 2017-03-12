@@ -1,0 +1,49 @@
+<%- include('header') %>
+
+
+<div class="col-lg-2">
+</div>
+
+<div class="col-lg-8">
+  <div class="well">
+    <form class="form-horizontal" method="post" >
+      <fieldset>
+        <legend>修改密码</legend>
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-4 control-label">现密码</label>
+          <div class="col-lg-8">
+            <input type="text" class="form-control" id="inputUserName" name="oldPassword" >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-4 control-label">新密码(至少六个字符)</label>
+          <div class="col-lg-8">
+            <input type="password" class="form-control" id="inputPassword" name="password" >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-lg-4 control-label">重复新密码</label>
+          <div class="col-lg-8">
+          <input type="password" class="form-control" name="repassword">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-4">
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="col-lg-2">
+</div>
+
+
+
+
+<%- include('footer') %>

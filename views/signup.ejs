@@ -1,0 +1,50 @@
+<%- include('header') %>
+
+
+<div class="col-lg-2">
+</div>
+
+<div class="col-lg-8">
+  <div class="well">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+      <fieldset>
+        <legend>注册</legend>
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-4 control-label">用户名</label>
+          <div class="col-lg-8">
+            <input type="text" class="form-control" id="inputUserName" name="name" placeholder="用户名">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-4 control-label">密码(至少六个字符)</label>
+          <div class="col-lg-8">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="密码">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-lg-4 control-label">重复密码</label>
+          <div class="col-lg-8">
+          <input placeholder="重复密码" type="password" class="form-control" name="repassword">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-4">
+            <button type="submit" class="btn btn-primary">注册</button>
+            <a href="/signin">已有账户？去登录</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="col-lg-2">
+</div>
+
+
+
+
+<%- include('footer') %>

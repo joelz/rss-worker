@@ -1,0 +1,15 @@
+
+  <% if (success) { %>
+    <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong><%= success %>.</strong>
+    </div>
+  <% } %>
+
+  <% if (error) { %>
+    <div class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <strong>出错啦!</strong> <%= error %>
+    </div>
+  <% } %>
+

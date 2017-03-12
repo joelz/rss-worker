@@ -1,0 +1,7 @@
+<%- include('header') %>
+
+<% jobs.forEach(function (job) { %>
+  <%- include('components/job-content', { job: job }) %>
+<% }) %>
+
+<%- include('footer') %>

@@ -1,0 +1,32 @@
+<div class="post-content">
+  <div class="ui grid">
+
+    <div class="eight wide column">
+      <div class="ui segment">
+        <h3><a href="/jobs/<%= job._id %>"><%= job.title %></a>(<%= job.active?"已启用":"已禁用" %>)</h3>
+        <pre><%- job.url %></pre>
+        <div>
+          <span class="tag">最后执行时间：<%= job.lastFetchEndTime %></span>
+          <span class="tag right">            
+            <% if (user && job.user._id && user._id.toString() === job.user._id.toString()) { %>
+              <div class="ui inline dropdown">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item"><a href="/jobs/<%= job._id %>/edit">编辑</a></div>
+
+                  <% if (job.active) { %>
+                  <div class="item"><a href="/jobs/<%= job._id %>/disable">禁用</a></div>
+                  <% } else { %>
+                  <div class="item"><a href="/jobs/<%= job._id %>/enable">启用</a></div>
+                  <% } %>
+                </div>
+              </div>
+            <% } %>
+
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="post-content">
+  <div class="ui grid">
+
+
+    <div class="twelve wide column">
+      <div class="ui segment">
+        <h3><a href="/posts/<%= post._id %>"><%= post.title %></a></h3>
+        <pre><%- post.description %></pre>
+        <div>
+          <span class="tag"><%= post.pubDate %></span>
+          <span class="tag right">
+            <span>浏览(<%= post.pv %>)</span>
+            <span>留言(<%= post.commentsCount %>)</span>
+            
+           
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
