@@ -1,7 +1,35 @@
 <%- include('header') %>
 
-<% jobs.forEach(function (job) { %>
-  <%- include('components/job-content', { job: job }) %>
-<% }) %>
+<div class="panel panel-default">
 
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Job标题</th>
+            <th>是否启用</th>
+            <th>最后更新时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% jobs.forEach(function (job) { %>
+        <tr>
+            <td><%= job.title  %></td>
+            <td><%= job.active  %></td>
+            <td><%= job.update_at  %></td>
+            <td>
+              <a href="/jobs/<%= job._id %>" class="btn btn-xs btn-info">查看</a>
+              <% if (job.active) { %>
+             <a href="/jobs/<%= job._id %>/disable"  class="btn btn-xs btn-danger">禁用</a>
+              <% } else { %>
+              <a href="/jobs/<%= job._id %>/enable"  class="btn btn-xs btn-info">启用</a>
+              <% } %>
+              <a href="/jobs/<%= job._id %>/posts" class="btn btn-xs btn-info">所有Posts</a>
+            </td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+
+</div>
 <%- include('footer') %>
