@@ -1,6 +1,6 @@
 <%- include('header') %>
 
-<div class="row col-md-offset-1">
+<div class="row">
   <h3 >Post列表</h3>
 </div>
 
@@ -9,13 +9,15 @@
 <% } %>
 
 <% posts.forEach(function (post) { %>
-<div class="row  col-md-offset-1" style="border:1px solid green; margin-top:1px;">
-    <div class="col-md-10">
+<div class="row " style="border:2px solid #eceeef;">
+    <div class="col-md-12">
       <h4 ><a href="/posts/<%= post._id %>"> <%= post.title %></a></h4>
     </div>
+    <div class="col-md-2">
+      <span class="glyphicon glyphicon-home"></span><a href="/jobs/<%= post.job._id %>" class="text-primary"> <%= post.job.title %></a>
+    </div>
     <div class="col-md-10">
-      <a href="/jobs/<%= post.job._id %>"> <%= post.job.title %></a>
-      <%= post.pub_at %>
+      <span class="glyphicon glyphicon-time"></span><%= post.pub_at %>
     </div>
 </div>
 <% }) %>

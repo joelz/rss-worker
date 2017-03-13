@@ -80,14 +80,16 @@ router.get('/:jobId', checkLogin, function(req, res, next) {
   ])
   .then(function (result) {
     var job = result[0];
-    var posts = result[1];
+    var posts = result[1].data;
+    var pagerParam = result[1].pagerParam;
     if (!job) {
       throw new Error('该Job不存在');
     }
 
     res.render('job', {
       job: job,
-      posts: posts
+      posts: posts,
+      pagerParam: pagerParam
     });
   })
   .catch(next);

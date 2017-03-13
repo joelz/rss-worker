@@ -1,32 +1,42 @@
-<div class="post-content">
-  <div class="ui grid">
-
-    <div class="eight wide column">
-      <div class="ui segment">
-        <h3><a href="/jobs/<%= job._id %>"><%= job.title %></a>(<%= job.active?"已启用":"已禁用" %>)</h3>
-        <pre><%- job.url %></pre>
-        <div>
-          <span class="tag">最后执行时间：<%= job.lastFetchEndTime %></span>
-          <span class="tag right">            
-            <% if (user && job.user._id && user._id.toString() === job.user._id.toString()) { %>
-              <div class="ui inline dropdown">
-                <div class="text"></div>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                  <div class="item"><a href="/jobs/<%= job._id %>/edit">编辑</a></div>
-
-                  <% if (job.active) { %>
-                  <div class="item"><a href="/jobs/<%= job._id %>/disable">禁用</a></div>
-                  <% } else { %>
-                  <div class="item"><a href="/jobs/<%= job._id %>/enable">启用</a></div>
-                  <% } %>
-                </div>
-              </div>
-            <% } %>
-
-          </span>
-        </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= job.title %></a>(<%= job.active?"已启用":"已禁用" %>)</h2>
+  </div>
+  <div class="panel-body">
+    <form>
+      <div class="form-group">
+          <label>URL</label>
+          <p><%= job.url %></p>
       </div>
-    </div>
+      <div class="form-group">
+          <label>Actions</label>
+          <p><%= job.actions %></p>
+      </div>
+      <div class="form-group">
+          <label>最近的Posts</label>
+          <% if (!posts || posts.length == 0) { %>
+            <p>目前还没有抓取到任何内容。</p>
+          <% } %>
+
+          <div class="list-group">
+          <% posts.forEach(function (post) { %>
+            <a href="/posts/<%= post._id %>"  class="list-group-item"> <%= post.title %></a>
+          <% }) %>
+          <% if ( pagerParam.lastId != -1) { %>
+            <a href="/jobs/<%= job._id %>/posts/?next=<%= pagerParam.lastId %>" class="list-group-item">More</a>
+          <% } %>
+          </div>
+      </div>
+    </form>
+  </div>
+  <div class="panel-footer">
+    <% if (user && job.user._id && user._id.toString() === job.user._id.toString()) { %>
+      <a href="/jobs/<%= job._id %>/edit" class="btn btn-xs btn-info">编辑</a>
+      <% if (job.active) { %>
+      <a href="/jobs/<%= job._id %>/disable" class="btn btn-xs btn-danger">禁用</a>
+      <% } else { %>
+      <a href="/jobs/<%= job._id %>/enable" class="btn btn-xs btn-info">启用</a>
+      <% } %>
+    <% } %>
   </div>
 </div>

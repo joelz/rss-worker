@@ -127,13 +127,11 @@ module.exports = {
           pagerParam.firstId = posts[0]._id.toString();
 
           Promise.all([
-            getPosts(author, null, pagerParam.firstId, 'prev'),
-            getPosts(author, null, pagerParam.lastId, 'next'),
+            getPosts(author, job, pagerParam.firstId, 'prev'),
+            getPosts(author, job, pagerParam.lastId, 'next'),
           ])
             .then(function (result) {
-              var prevPage = result[0];
-              var nextPage = result[1];
-              
+                            
               //不存在上一页
               if (!result[0] || result[0].length == 0) {
                 pagerParam.firstId = -1;

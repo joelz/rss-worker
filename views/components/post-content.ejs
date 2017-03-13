@@ -1,21 +1,12 @@
-<div class="post-content">
-  <div class="ui grid">
-
-
-    <div class="twelve wide column">
-      <div class="ui segment">
-        <h3><a href="/posts/<%= post._id %>"><%= post.title %></a></h3>
-        <pre><%- post.description %></pre>
-        <div>
-          <span class="tag"><%= post.pubDate %></span>
-          <span class="tag right">
-            <span>浏览(<%= post.pv %>)</span>
-            <span>留言(<%= post.commentsCount %>)</span>
-            
-           
-          </span>
-        </div>
-      </div>
-    </div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= post.title %></h2>
+  </div>
+  <div class="panel-body">
+    <%- post.description %>
+  </div>
+  <div class="panel-footer">
+      <span class="glyphicon glyphicon-home"></span><a href="/jobs/<%= post.job._id %>" ><%= post.job.title %></a>
+      <span class="glyphicon glyphicon-time"></span><%= post.pub_at %>
   </div>
 </div>

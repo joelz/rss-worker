@@ -8,5 +8,5 @@ module.exports = {
   mongodb: 'mongodb://localhost:27017/myblog',
   maxParallelLimit: 3,
   jobIntervalInMin: 10,
-  pageSize: 3
+  pageSize: 10
 };
