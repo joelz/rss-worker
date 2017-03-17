@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
-    "start": "NODE_ENV=production pm2 start index.js --node-args='--harmony' --name 'myblog'",
+    "start": "SET NODE_ENV=production && pm2 start index.js --node-args='--harmony' --name rss-worker",
     "dev": "node ./node_modules/supervisor/lib/cli-wrapper.js --harmony index"
   },
   "author": "nswbmw",

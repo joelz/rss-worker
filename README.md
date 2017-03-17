@@ -21,7 +21,7 @@
 1. 用户的注册
 2. 用户的登录和注销
 3. 用户可添加Job
-4. Job可以定期执行，抓取Posts
+4. Job可以定期执行，抓取Posts（目前需每天定期重启，以便将当日新加的Job加入到定时任务中）
 5. Posts存储到MongoDB中
 6. 支持多用户
 
@@ -42,8 +42,9 @@ npm run dev
 
 ## TODO
 
-1. 全文搜索功能
-2. 添加更多的Actions，并优化新建Job界面的Action选择功能
+1. 添加新的Job后，自动将其加入到定时任务中
+2. 全文搜索功能
+3. 添加更多的Actions，并优化新建Job界面的Action选择功能
 
 
 ## License
