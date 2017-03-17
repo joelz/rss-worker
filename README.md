@@ -1,7 +1,7 @@
 # rss-worker
 
 
-本人订阅了40+的Podcast，每天这些Podcast都有很多更新。为了方便未来的查询分析，我需要一个工具来把它们的更新统一存储。
+本人订阅了40+的Podcast，每天都有很多Podcast更新。为了方便未来的查询分析，我需要一个工具将这些更新统一存储。
 
 
 在学习[nswbmw/N-blog: 一起学 Node.js](https://github.com/nswbmw/N-blog)的过程中，看到了[chuck911/Nu-Reader: Reader Reinvented ,Not Only RSS!](https://github.com/chuck911/Nu-Reader)这个项目，正是解决上述问题的好办法。我将两个项目的代码做了些整合和修改，就有了rss-worker这个项目。
@@ -14,6 +14,16 @@
 
 *	Node 4.2+
 *	MongoDB 3.2.9
+
+
+## 已实现功能
+
+1. 用户的注册
+2. 用户的登录和注销
+3. 用户可添加Job
+4. Job可以定期执行，抓取Posts
+5. Posts存储到MongoDB中
+6. 支持多用户
 
 
 ## 如何运行
