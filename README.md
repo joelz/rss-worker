@@ -45,6 +45,7 @@ npm run dev
 1. 添加新的Job后，自动将其加入到定时任务中
 2. 全文搜索功能
 3. 添加更多的Actions，并优化新建Job界面的Action选择功能
+4. Post显示页直接添加附件下载和播放
 
 
 ## License
