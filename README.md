@@ -28,7 +28,9 @@
 
 ## 如何运行
 
-先到`config\default.js`中配置MongoDB连接字符串，然后：
+先将`config\default.sample.js`复制到`config\default.js`中
+
+然后到`config\default.js`中配置MongoDB连接字符串，接下来：
 
 ```
 cd {project_dir}
