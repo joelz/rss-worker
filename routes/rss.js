@@ -29,7 +29,9 @@ router.get('/:user', checkNotLogin, function (req, res, next) {
 
           //准备feed          
           var feed = new rss({
-            title: user.name + "关注的公众号文章"
+            title: user.name + "关注的公众号文章",
+            feed_url: config.siteUrl + "/rss/" + user.name,
+            site_url: config.siteUrl
           });
 
           obj.forEach(function (post) {

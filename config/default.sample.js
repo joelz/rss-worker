@@ -10,5 +10,6 @@ module.exports = {
   maxParallelLimit: 3,
   jobIntervalInMin: 10,
   pageSize: 10,
-  rssItemCount: 30
+  rssItemCount: 30,
+  siteUrl:"http://localhost:3000"
 };
