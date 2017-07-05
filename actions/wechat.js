@@ -92,7 +92,7 @@ function fetchArticleContent(data, callback) {
 			$("#img-content").each(function (idx, element) {
 				var $element = $(element);
 				items[x].description = $element.html();
-				items[x].pubDate = new Date($element.find("#post-date").text() + "T00:00:00");
+				items[x].pubDate = new Date($element.find("#post-date").text() + "T00:00:00+08:00");
 			});
 
 			fetchContent(x + 1);

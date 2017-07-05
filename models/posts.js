@@ -90,6 +90,30 @@ function getPosts(author, job, startId, prevOrNext) {
     .exec();
 }
 
+// 按pubDate倒序返回一页Posts，for RSS
+function getPostsForRss(author, job) {
+  var query = {};
+  if (author) {
+    query.author = author;
+  }
+
+  if (job) {
+    query.job = job;
+  }
+  
+  var sortObj = { pubDate: -1 };
+  
+  var pageSize = config.rssItemCount ? config.rssItemCount : 50;
+
+  return Post
+    .find(query)
+    .limit(pageSize)
+    .populate({ path: 'author', model: 'User' })
+    .populate({ path: 'job', model: 'Job' })
+    .sort(sortObj)
+    .addCreatedAt()
+    .exec();
+}
 
 module.exports = {
 
@@ -105,6 +129,8 @@ module.exports = {
 
   // 按pubDate倒序返回一页Posts
   getPosts: getPosts,
+
+  getPostsForRss: getPostsForRss,
 
   // 按pubDate倒序返回一页Posts，同时返回pagerParam
   getPostsPage: function getPostsPage(author, job, startId, prevOrNext) {

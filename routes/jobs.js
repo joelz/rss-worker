@@ -155,7 +155,7 @@ router.get('/:jobId/edit', checkLogin, function(req, res, next) {
 });
 
 // POST /jobs/:jobId/edit 更新Job
-router.post('/:jobId/edit', checkLogin, function(req, res, next) {
+router.post('/:jobId/edit', checkLogin, function (req, res, next) {
   var jobId = req.params.jobId;
   var user = req.session.user._id;
 
@@ -175,21 +175,27 @@ router.post('/:jobId/edit', checkLogin, function(req, res, next) {
     if (!actions.length) {
       throw new Error('请填写actions');
     }
-
-    if (user.toString() !== jobId.toString()) {
-        throw new Error('权限不足');
-    }
-
   } catch (e) {
     req.flash('error', e.message);
     return res.redirect('back');
   }
-  
-  JobModel.updateJobById(jobId, user, { title: title, url: url, actions: actions, active: active })
-    .then(function () {
-      req.flash('success', '编辑Job成功');
 
-      res.redirect(`/jobs/${jobId}`);
+  JobModel.getJobById(jobId)
+    .then(function (job) {
+      if (!job) {
+        throw new Error('该Job不存在');
+      }
+      if (user.toString() !== job.user._id.toString()) {
+        throw new Error('权限不足');
+      }
+
+      JobModel.updateJobById(jobId, user, { title: title, url: url, actions: actions, active: active })
+        .then(function () {
+          req.flash('success', '编辑Job成功');
+
+          res.redirect(`/jobs/${jobId}`);
+        })
+        .catch(next);
     })
     .catch(next);
 });

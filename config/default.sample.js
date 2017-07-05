@@ -9,5 +9,6 @@ module.exports = {
   mongodb: 'mongodb://user:passWord@localhost:27017/myblog',
   maxParallelLimit: 3,
   jobIntervalInMin: 10,
-  pageSize: 10
+  pageSize: 10,
+  rssItemCount: 30
 };
