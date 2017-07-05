@@ -1,4 +1,6 @@
 var rss = require('rss');
+const Feed = require('feed');
+
 var express = require('express');
 var router = express.Router();
 
@@ -6,10 +8,8 @@ var config = require('config-lite');
 var PostModel = require('../models/posts');
 var UserModel = require('../models/users');
 
-var checkNotLogin = require('../middlewares/check').checkNotLogin;
-
 // GET /jjooeell 
-router.get('/:user', checkNotLogin, function (req, res, next) {
+router.get('/:user', function (req, res, next) {
   var name = req.params.user;
 
   UserModel.getUserByName(name)
@@ -27,7 +27,7 @@ router.get('/:user', checkNotLogin, function (req, res, next) {
       PostModel.getPostsForRss(author)
         .then(function (obj) {
 
-          //准备feed          
+/*          //准备feed          
           var feed = new rss({
             title: user.name + "关注的公众号文章",
             feed_url: config.siteUrl + "/rss/" + user.name,
@@ -46,7 +46,47 @@ router.get('/:user', checkNotLogin, function (req, res, next) {
 
           //输出feed
           res.contentType("application/rss+xml");
-          res.send(feed.xml());
+          res.send(feed.xml());*/
+
+
+          let feed = new Feed({
+            title: user.name + "关注的公众号文章",
+            description: 'This is my personal feed!',
+            id: config.siteUrl + "/rss/" + user.name,
+            link: config.siteUrl + "/rss/" + user.name,
+            image: 'http://example.com/image.png',
+            favicon: 'http://example.com/favicon.ico',
+            copyright: '',
+
+            feedLinks: {
+              json: 'https://example.com/json',
+              atom: 'https://example.com/atom',
+            },
+            author: {
+              name: 'John Doe',
+              email: 'johndoe@example.com',
+              link: config.siteUrl
+            }
+          });
+          
+
+
+          obj.forEach(function (post) {
+            feed.addItem({
+              title: post.title,
+              id: post.link,
+              link: post.link,
+              description: post.description,
+              content: post.description,
+              author: [],
+              contributor: [],
+              date: post.pubDate
+            });
+          });
+          
+          res.contentType("text/xml; charset=utf-8");
+          res.send(feed.rss2());
+
         })
         .catch(next);
     })
