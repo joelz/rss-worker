@@ -76,7 +76,7 @@ router.get('/:user', function (req, res, next) {
               title: post.title,
               id: post.link,
               link: post.link,
-              description: post.description,
+              description: post.title,
               content: post.description,
               author: [],
               contributor: [],
