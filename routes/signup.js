@@ -7,13 +7,26 @@ var router = express.Router();
 var UserModel = require('../models/users');
 var checkNotLogin = require('../middlewares/check').checkNotLogin;
 
+var config = require('config-lite');
+
 // GET /signup 注册页
-router.get('/', checkNotLogin, function(req, res, next) {
+router.get('/', checkNotLogin, function (req, res, next) {
+  if (!config.signUpOpen) {
+    req.flash('error', "目前本网站尚未开放注册。");
+    return res.redirect('/signin');
+  }
+
   res.render('signup');
 });
 
 // POST /signup 用户注册
-router.post('/', checkNotLogin, function(req, res, next) {
+router.post('/', checkNotLogin, function (req, res, next) {
+  
+  if (!config.signUpOpen) { 
+    req.flash('error', "目前本网站尚未开放注册。");
+    return res.redirect('/signin');
+  }
+
   var name = req.fields.name;
   var password = req.fields.password;
   var repassword = req.fields.repassword;

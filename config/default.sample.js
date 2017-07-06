@@ -11,5 +11,6 @@ module.exports = {
   jobIntervalInMin: 10,
   pageSize: 10,
   rssItemCount: 30,
-  siteUrl:"http://localhost:3000"
+  siteUrl: "http://localhost:3000",
+  signUpOpen: 1
 };

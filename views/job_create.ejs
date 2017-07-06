@@ -25,7 +25,11 @@
         <div class="form-group">
           <label for="actions" class="col-lg-2 control-label">Actions</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputActions" value="feed.fetch,feed.removeDuplicate,feed.update" name="actions" placeholder="">
+            <select id="inputActions" class="form-control"  name="actions" >
+              <option text="请选择" value="">请选择</option>
+              <option text="feed" value="feed.fetch,feed.removeDuplicate,feed.update">feed</option>
+              <option text="wechat-传送门" value="wechat.fetchList,wechat.removeDuplicate,wechat.fetchContent,wechat.update">wechat-传送门</option>
+            </select>
           </div>
         </div>
 

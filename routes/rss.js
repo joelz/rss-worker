@@ -9,8 +9,9 @@ var PostModel = require('../models/posts');
 var UserModel = require('../models/users');
 
 // GET /jjooeell 
-router.get('/:user', function (req, res, next) {
+router.get('/:user/:feedType?', function (req, res, next) {
   var name = req.params.user;
+  var feedType = req.params.feedType;
 
   UserModel.getUserByName(name)
     .then(function (user) {
@@ -50,27 +51,24 @@ router.get('/:user', function (req, res, next) {
 
 
           let feed = new Feed({
-            title: user.name + "关注的公众号文章",
-            description: 'This is my personal feed!',
+            title: user.name + "关注的网文",
+            description:  user.name +'关注的网文',
             id: config.siteUrl + "/rss/" + user.name,
             link: config.siteUrl + "/rss/" + user.name,
-            image: 'http://example.com/image.png',
-            favicon: 'http://example.com/favicon.ico',
+            image: config.siteUrl+'/rss-image.png',
+            favicon: config.siteUrl+'/favicon.ico',
             copyright: '',
 
             feedLinks: {
-              json: 'https://example.com/json',
-              atom: 'https://example.com/atom',
+              atom: config.siteUrl + "/rss/" + user.name+'/atom',
             },
             author: {
-              name: 'John Doe',
-              email: 'johndoe@example.com',
+              name: user.name,
+              email: '',
               link: config.siteUrl
             }
           });
           
-
-
           obj.forEach(function (post) {
             feed.addItem({
               title: post.title,
@@ -85,7 +83,11 @@ router.get('/:user', function (req, res, next) {
           });
           
           res.contentType("text/xml; charset=utf-8");
-          res.send(feed.rss2());
+
+          if (feedType == "atom")
+            res.send(feed.atom1());
+          else
+            res.send(feed.rss2());
 
         })
         .catch(next);
