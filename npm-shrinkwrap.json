@@ -343,9 +343,9 @@
       "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
     },
     "ejs": {
-      "version": "2.5.2",
-      "from": "ejs@2.5.2",
-      "resolved": "https://registry.npm.taobao.org/ejs/download/ejs-2.5.2.tgz"
+      "version": "2.5.5",
+      "from": "ejs@2.5.5",
+      "resolved": "https://registry.npm.taobao.org/ejs/download/ejs-2.5.5.tgz"
     },
     "encodeurl": {
       "version": "1.0.1",
